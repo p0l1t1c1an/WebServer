@@ -16,5 +16,5 @@ fn rocket() -> _ {
 ```
 
 I do plan on building a bit more in depth site, but the site would be static so I think i just need to implement TLS
-Rocket makes this really easy but I'm unsure of how secure it is or how TLS is implemented.
 
+Rocket makes this really easy but I'm unsure of how secure it is or how TLS is implemented
