@@ -1,13 +1,14 @@
 
 use rocket::fs::{FileServer};
-use std::os::unix::fs::chroot;
-use std::env::set_current_dir;
+use privdrop::PrivDrop;
 
 #[rocket::main]
 async fn main() -> anyhow::Result<()> {
-    chroot("/home/p0l1t1c1an/Programs/WebServer/p0l1t1c1an.github.io")?;
-    set_current_dir("/")?;
-    let _rocket = rocket::build()
+    PrivDrop::default()
+    .chroot("/home/p0l1t1c1an/Programs/WebServer/p0l1t1c1an.github.io") // should be www directory
+    .user("p0l1t1c1an") // should be nobody in web
+    .apply()?;
+    let _ = rocket::build()
         .mount("/", FileServer::from("/"))
         .launch().await?; 
     Ok(())
